@@ -7,7 +7,12 @@ jobs:
     name: Fuzz test
     runs-on: ubuntu-latest
     steps:
-      - uses: jidicula/go-fuzz-action@v1.2.0
+      - name: Harden Runner
+        uses: step-security/harden-runner@a4aa98b93cab29d9b1101a6143fb8bce00e2eac4 # v2.7.1
+        with:
+          egress-policy: audit
+
+      - uses: jidicula/go-fuzz-action@4f24eed45b25214f31a9fe035ca68ea2c88c6a13 # v1.2.0
         with:
           packages: './...'
           fuzz-time: 30s
